@@ -59,13 +59,31 @@ valid_dl = DataLoader(valid_data,batch_size=BATCH_SIZE*2,num_workers=2,pin_memor
 test_dl = DataLoader(test_data,batch_size=BATCH_SIZE, num_workers=2, pin_memory=True)
 ```
 
+### Explore and Preview Images
+```
+def decode_label(label_number):
+    if label_number==0:
+        return "NORMAL"
+    return "PNEUMONIA"
+    
+def show_image(img_tuple):
+    plt.imshow(img_tuple[0].permute(1,2,0))
+    print("Label: ",decode_label(img_tuple[1]))
+show_image(dataset[0])
+```
+![image showing single chest x-ray image with label]({{ site.baseurl }}/images/single-x-ray-image.png "single chest x-ray image with label") 
 
-
-
-
-
-
-
+```
+def show_batch(dl, invert=False):
+    for images, labels in dl:
+        fig, ax = plt.subplots(figsize=(16, 8))
+        ax.set_xticks([]); ax.set_yticks([])
+        data = 1-images if invert else images
+        ax.imshow(make_grid(data, nrow=16).permute(1, 2, 0))
+        break
+show_batch(train_dl)        
+```
+![batch of chest x-ray images]({{ site.baseurl }}/images/batch-x-ray-image.png "batch of chest x-ray images") 
 
 
 
