@@ -4,7 +4,8 @@ title: Classification of Chest X-ray Images for Pneumonia using Transfer Learnin
 ---
 ### Introduction
 This is my first project on deep learning (especially Convolutional Neural Networks) with Pytorch. In this project, I will be using the [Chest X-Ray Images (Pneumonia) dataset](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia). The dataset is initially organized into 3 folders such as 'train','val' and 'test'. Each contains subfolders for each category such as 'Pneumonia' and 'Normal'.
-The code snippets below are from Jupyter Notebook which you can find on my [GitHub](https://www.github.com/babyyawlwi) 
+The code snippets below are from Jupyter Notebook which you can find on my [GitHub](https://www.github.com/babyyawlwi)   
+![image showing normal and pneumonia chest x-rays]({{ site.baseurl }}/images/chest-x-ray-image.png "Chest x-ray images")  
 
 ### Organizing the image dataset
 The training folder contains 1341 Normal and 3875 Pneumonia Chest X-ray Images; and the testing folder contains 234 Normal and 390 Pneumonia images. The validation folder, however, contains only 8 images for each category. Instead of using the validation folder, I decided to use 10% of training data as validation data.  
