@@ -10,7 +10,7 @@ The code snippets below are from Jupyter Notebook which you can find on my [GitH
 ### Organizing the dataset
 The training folder contains 1341 Normal and 3875 Pneumonia Chest X-ray Images; and the testing folder contains 234 Normal and 390 Pneumonia images. The validation folder, however, contains only 8 images for each category. Instead of using the validation folder, I decided to use 10% of training data as validation data.  
 Firstly, the required modules are imported:  
-``
+```
 import os    
 import torch   
 import pandas as pd  
@@ -26,9 +26,9 @@ from torchvision.utils import make_grid
 from tqdm.notebook import tqdm
 import matplotlib.pyplot as plt  
 %matplotlib inline
-``
+```
 The dataset and test dataset will be loaded first from the folders and  the images in the datasets are transformed by resizing to (224,224) and then normalizing.
-``
+```
 stats = ((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
 train_transforms = transforms.Compose([transforms.Resize((224,224),interpolation=Image.NEAREST),
                                        transforms.RandomHorizontalFlip(),
@@ -42,7 +42,7 @@ test_transforms = transforms.Compose([transforms.Resize((224,224),interpolation=
                                      ])
 dataset = datasets.ImageFolder(TRAIN_DIR, transform=train_transforms)
 test_data = datasets.ImageFolder(TEST_DIR, transform=test_transforms)                                   
-``
+```
 
 We will split the 10% of the dataset into validation dataset and the rest as training dataset.  
 `
