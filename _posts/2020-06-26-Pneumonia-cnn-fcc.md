@@ -2,12 +2,11 @@
 layout: post
 title: Chest X-ray Images Classification using Transfer Learning with Pytorch
 ---
-### Introduction
-This is my first project on deep learning (especially Convolutional Neural Networks) with Pytorch. In this project, I will be using the [Chest X-Ray Images (Pneumonia) dataset](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia). The dataset is initially organized into 3 folders such as 'train','val' and 'test'. Each contains subfolders for each category such as 'Pneumonia' and 'Normal'.
-The code snippets below are from Jupyter Notebook which you can find on my [GitHub](https://www.github.com/babyyawlwi)   
+## Introduction
+This is my first project on deep learning (especially Convolutional Neural Networks) with Pytorch. In this project, I will be using the [Chest X-Ray Images (Pneumonia) dataset](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia). The dataset is initially organized into 3 folders such as 'train','val' and 'test'. Each contains subfolders for each category such as 'Pneumonia' and 'Normal'.  
 ![image showing normal and pneumonia chest x-rays]({{ site.baseurl }}/images/chest-x-ray-image.png "Chest x-ray images")  
-
-### Organizing the dataset
+  
+## Organizing the dataset
 The training folder contains 1341 Normal and 3875 Pneumonia Chest X-ray Images; and the testing folder contains 234 Normal and 390 Pneumonia images. The validation folder, however, contains only 8 images for each category. Instead of using the validation folder, I decided to use 10% of training data as validation data.  
 Firstly, the required modules are imported:  
 ```
@@ -59,8 +58,8 @@ train_dl = DataLoader(train_data,batch_size=BATCH_SIZE,shuffle=True,num_workers=
 valid_dl = DataLoader(valid_data,batch_size=BATCH_SIZE*2,num_workers=2,pin_memory=True)
 test_dl = DataLoader(test_data,batch_size=BATCH_SIZE, num_workers=2, pin_memory=True)
 ```
-
-### Previewing Images
+  
+## Previewing Images
 We will preview some images from the training dataloader. 
 ```
 def decode_label(label_number):
@@ -87,8 +86,8 @@ show_batch(train_dl)
 ```
 ![batch of chest x-ray images]({{ site.baseurl }}/images/batch-x-ray.png "batch of chest x-ray images") 
 
-### Configuring GPU
-To move the model and images in dataloader to GPU if it is available, the following functions are defined.
+## Configuring GPU
+If GPU is available, we will set it as the default device for the model and data to move to. 
 ```
 def get_default_device():
     if torch.cuda.is_available():
@@ -114,13 +113,15 @@ class DeviceDataLoader():
         return len(self.dl)
         
 device = get_default_device()
-
+```
+Next, we will set the training and validation dataloaders to transfer the batches of images to the previously defined default device. 
+```
 trn_dl = DeviceDataLoader(train_dl, device)
 val_dl = DeviceDataLoader(valid_dl, device)
 tst_dl = DeviceDataLoader(test_dl, device)
 ```
 
-### Model
+## Model
 
 ```
 def accuracy(outputs, labels):
