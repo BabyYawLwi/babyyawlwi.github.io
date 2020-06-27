@@ -42,7 +42,6 @@ test_transforms = transforms.Compose([transforms.Resize((224,224),interpolation=
 dataset = datasets.ImageFolder(TRAIN_DIR, transform=train_transforms)
 test_data = datasets.ImageFolder(TEST_DIR, transform=test_transforms)                                   
 ```
-
 We will split the 10% of the dataset into validation dataset and the rest as training dataset.  
 ```
 val_pct = 0.1
@@ -50,7 +49,6 @@ val_size = int(val_pct * len(dataset))
 train_size = len(dataset) - val_size
 train_data, valid_data = random_split(dataset, [train_size, val_size])
 ```
-
 Next, we define training, validation and testing data loaders for retrieving images in batches.
 ```
 BATCH_SIZE = 64
@@ -122,7 +120,7 @@ tst_dl = DeviceDataLoader(test_dl, device)
 ```
 
 ## Model
-
+We will then create a CNN model with resnet50 architecture and transfer the model to the default device. 
 ```
 def accuracy(outputs, labels):
     preds = [1 if pred>0.5 else 0 for pred in outputs]
@@ -174,7 +172,7 @@ model = to_device(PneumoniaCnnModel(), device)
 
 ### Training the Model
 
-
+During the training of the model, we will use one-cycle learning rate policy to schedule the learning rate; weight decay as regularization technique and gradient clipping.
 ```
 @torch.no_grad()
 def evaluate(model, val_loader):
@@ -219,7 +217,9 @@ def fit(epochs, max_lr, model, train_loader, val_loader, weight_decay=0, grad_cl
     return history
     
 history = [evaluate(model, val_dl)]
-
+```
+We will use Adam optimizer and then fit the model to training data for 10 epochs. 
+```
 num_epochs = 10
 max_lr = 1e-2
 opt_func = torch.optim.Adam
@@ -230,7 +230,6 @@ history += fit(num_epochs, max_lr, model, trn_dl, val_dl, weight_decay=weight_de
 ```
 
 ### Making Predictions on Test Data
-
 ```
 @torch.no_grad()
 def predict_dl(dl, model):
@@ -247,7 +246,7 @@ test_accuracy = accuracy(test_predictions, test_labels)
 ```
 
 ### Saving the trained model and its parameters
-
+Finally we will save the model using torch.save() and log the hypermeters as well as the metrics using jovian. 
 ```
 torch.save(model.state_dict(), 'chest-x-ray-resnet50-model.pth')
 
