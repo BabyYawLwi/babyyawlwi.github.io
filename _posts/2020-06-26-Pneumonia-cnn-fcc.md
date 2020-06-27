@@ -45,23 +45,23 @@ test_data = datasets.ImageFolder(TEST_DIR, transform=test_transforms)
 ```
 
 We will split the 10% of the dataset into validation dataset and the rest as training dataset.  
-`
+```
 val_pct = 0.1
 val_size = int(val_pct * len(dataset))
 train_size = len(dataset) - val_size
 train_data, valid_data = random_split(dataset, [train_size, val_size])
-`
+```
 
 Next, we define training, validation and testing data loaders for retrieving images in batches.
-`
+```
 BATCH_SIZE = 64
 train_dl = DataLoader(train_data,batch_size=BATCH_SIZE,shuffle=True,num_workers=2,pin_memory=True)
 valid_dl = DataLoader(valid_data,batch_size=BATCH_SIZE*2,num_workers=2,pin_memory=True)
 test_dl = DataLoader(test_data,batch_size=BATCH_SIZE, num_workers=2, pin_memory=True)
-`
+```
 
 ### Previewing Images
-
+We will preview some images from the training dataloader. 
 ```
 def decode_label(label_number):
     if label_number==0:
@@ -88,7 +88,7 @@ show_batch(train_dl)
 ![batch of chest x-ray images]({{ site.baseurl }}/images/batch-x-ray.png "batch of chest x-ray images") 
 
 ### Configuring GPU
-
+To move the model and images in dataloader to GPU if it is available, the following functions are defined.
 ```
 def get_default_device():
     if torch.cuda.is_available():
