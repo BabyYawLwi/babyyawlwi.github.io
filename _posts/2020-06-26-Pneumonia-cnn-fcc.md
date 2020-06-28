@@ -120,7 +120,7 @@ tst_dl = DeviceDataLoader(test_dl, device)
 ```
 
 ## Model
-We will then create a CNN model with resnet50 architecture and transfer the model to the default device. 
+We will then create a CNN model with resnetWe will then create a CNN model with resnet50 architecture. Since it is a classification problem, the binary cross entropy loss and accuracy are calculated. We will then transfer the model to the default device.50 architecture and transfer the model to the default device. 
 ```
 def accuracy(outputs, labels):
     preds = [1 if pred>0.5 else 0 for pred in outputs]
