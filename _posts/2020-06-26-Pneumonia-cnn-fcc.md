@@ -267,7 +267,8 @@ jovian.log_metrics(train_loss=history[-1]['train_loss'],
 jovian.commit(project=project_name, environment=None, outputs=['chest-x-ray-resnet50-model.pth'])
 ```
 
-
+## Conclusion
+According to the accuracy performance of the test dataset, there is more than 20% difference compared to the best training performance. It is evident that the model is more or less overfitted by the training data so it needs to be further regularized. In addition, since it is a classification problem, there is a threat for imbalanced data causing good accuracy so the model performances should be measured by more suitable metrics like F1 score or AUROC (area under ROC).
 
 
 
