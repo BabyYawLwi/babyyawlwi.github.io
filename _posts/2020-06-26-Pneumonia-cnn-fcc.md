@@ -228,6 +228,7 @@ weight_decay = 1e-4
 
 history += fit(num_epochs, max_lr, model, trn_dl, val_dl, weight_decay=weight_decay, grad_clip=grad_clip, opt_func=opt_func)
 ```
+https://jovian.ml/babyyawlwi/week5-assignment-course-project-fcc/v/5&cellId=35  
 
 ### Making Predictions on Test Data
 ```
@@ -244,6 +245,7 @@ def predict_dl(dl, model):
 test_predictions = predict_dl(tst_dl, model)
 test_accuracy = accuracy(test_predictions, test_labels)    
 ```
+https://jovian.ml/babyyawlwi/week5-assignment-course-project-fcc/v/5&cellId=42  
 
 ### Saving the trained model and its parameters
 Finally we will save the model using torch.save() and log the hypermeters as well as the metrics using jovian. 
@@ -251,7 +253,7 @@ Finally we will save the model using torch.save() and log the hypermeters as wel
 torch.save(model.state_dict(), 'chest-x-ray-resnet50-model.pth')
 
 import jovian
-jovian.log_hyperparams(arch='resnet50-imgnet', 
+jovian.log_hyperparams(arch='resnet50', 
                        epochs=num_epochs, 
                        lr=max_lr, 
                        scheduler='one-cycle',
