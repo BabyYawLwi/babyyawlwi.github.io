@@ -31,7 +31,7 @@ from imblearn.pipeline import make_pipeline, Pipeline
 from imblearn.over_sampling import SMOTE
 import lightgbm as lgb
 ```
-https://jovian.ml/babyyawlwi/credit-fraud-pub-kaggle/v/3&cellId=5
+[Output](https://jovian.ml/babyyawlwi/credit-fraud-pub-kaggle/v/3&cellId=5)
 
 ## Light Gradient Boosting Model (LightGBM)
 LightGBM is a gradient boosting framework that uses tree based learning algorithms. LightGBM model is trained on the highly imbalanced training dataset. It is designed to be distributed and efficient with the following advantages:
@@ -44,7 +44,7 @@ LightGBM is a gradient boosting framework that uses tree based learning algorith
 classifier.fit(X_train, y_train)
 ypred = classifier.predict(X_test)
 ```
-https://jovian.ml/babyyawlwi/credit-fraud-pub-kaggle/v/3&cellId=26 <br>
+[Output](https://jovian.ml/babyyawlwi/credit-fraud-pub-kaggle/v/3&cellId=26) <br>
 As expected, the LightGBM model predicts the more populated non-fraud transactions very accurately but performs badly for fraud. There are 39 false negatives (which are actually frauds but predicted as non-frauds by the model) which amount to about 39 percent of the total positives. For the case of detecting credit card frauds, lowering the number of false negatives is the most vital performance to improve so as to meet the objective of preventing as many frauds as possible. 
 
 ## Resampling with SMOTE and GridSearchCV Pipeline
