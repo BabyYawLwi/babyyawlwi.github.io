@@ -34,18 +34,17 @@ import lightgbm as lgb
 https://jovian.ml/babyyawlwi/credit-fraud-pub-kaggle/v/3&cellId=5
 
 ## Light Gradient Boosting Model (LightGBM)
-LightGBM is a gradient boosting framework that uses tree based learning algorithms. It is designed to be distributed and efficient with the following advantages:
+LightGBM is a gradient boosting framework that uses tree based learning algorithms. LightGBM model is trained on the highly imbalanced training dataset. It is designed to be distributed and efficient with the following advantages:
 - Faster training speed and higher efficiency: Light GBM use histogram based algorithm i.e it buckets continuous feature values into discrete bins which fasten the training procedure.
 - Lower memory usage: Replaces continuous values to discrete bins which result in lower memory usage.
 - Better accuracy than any other boosting algorithm: It produces much more complex trees by following leaf wise split approach rather than a level-wise approach which is the main factor in achieving higher accuracy. However, it can sometimes lead to overfitting which can be avoided by setting the max_depth parameter.
 - Compatibility with Large Datasets: It is capable of performing equally good with large datasets with a significant reduction in training time.
 - Parallel learning supported.[1] <br>
-LightGBM model is trained on the highly imbalanced training dataset. 
 ```
 classifier.fit(X_train, y_train)
 ypred = classifier.predict(X_test)
 ```
-https://jovian.ml/babyyawlwi/credit-fraud-pub-kaggle/v/3&cellId=26
+https://jovian.ml/babyyawlwi/credit-fraud-pub-kaggle/v/3&cellId=26 <br>
 As expected, the LightGBM model predicts the more populated non-fraud transactions very accurately but performs badly for fraud. There are 39 false negatives (which are actually frauds but predicted as non-frauds by the model) which amount to about 39 percent of the total positives. For the case of detecting credit card frauds, lowering the number of false negatives is the most vital performance to improve so as to meet the objective of preventing as many frauds as possible. 
 
 ## Resampling with SMOTE and GridSearchCV Pipeline
