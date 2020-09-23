@@ -50,7 +50,7 @@ As expected, the LightGBM model predicts the more populated non-fraud transactio
 
 ## Resampling with SMOTE and GridSearchCV Pipeline
 The model performance on the imbalanced dataset is not satisfactory so one of the approaches to address this problem is to oversample the minority class which is the fraud class. Synthetic Minority Oversampling Technique (SMOTE) is one of the oversampling techniques that creates synthetic minority class samples. SMOTE first selects a minority class instance a at random and finds its k nearest minority class neighbors. The synthetic instance is then created by choosing one of the k nearest neighbors b at random and connecting a and b to form a line segment in the feature space. The synthetic instances are generated as a convex combination of the two chosen instances a and b [2]
-The GridSearch Pipeline is constructed to search for the best parameters of the model for the optimal performance trained on the resampled data. 
+A Pipeline is constructed to search for the best parameters of the model using GridSearchCV while trained on the resampled data. 
 ```
 rs_parameters = {
     'lgbmclassifier__learning_rate': [0.005,0.01,0.001,0.05],
@@ -74,7 +74,7 @@ ypred = bestimator.predict(X_test)
 ```
 
 ## Conclusion
-According to the accuracy performance of the test dataset, there is more than 20% difference compared to the best training performance. It is evident that the model is more or less overfitted by the training data so it needs to be further regularized. In addition, since it is a classification problem, there is a threat for imbalanced data causing good accuracy so the model performances should be measured by more suitable metrics like F1 score or AUROC (area under ROC).
+After resampling with SMOTE and optimizing the parameters using GridSearch, the LightGBM model shows distinct improvement. There is a drastic decrease in the number of false negatives for about 70% so more frauds are being detected by the model. Given the class imbalance ratio, it was recommended to measure the performance using the Area Under the Precision-Recall Curve (AUPRC). The AUPRC for the model with resampled data also increases compared to the model with imbalanced data. 
 
 ## References
 [1] https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/
