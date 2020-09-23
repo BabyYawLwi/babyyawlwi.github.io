@@ -76,5 +76,5 @@ ypred = bestimator.predict(X_test)
 After resampling with SMOTE and optimizing the parameters using GridSearch, the LightGBM model shows distinct improvement. There is a drastic decrease in the number of false negatives for about 70% so more frauds are being detected by the model. Given the class imbalance ratio, it was recommended to measure the performance using the Area Under the Precision-Recall Curve (AUPRC). The AUPRC for the model with resampled data also increases compared to the model with imbalanced data. 
 
 ## References
-[1] https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/
+[1] https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/ <br>
 [2] Page 47, Imbalanced Learning: Foundations, Algorithms, and Applications, 2013
